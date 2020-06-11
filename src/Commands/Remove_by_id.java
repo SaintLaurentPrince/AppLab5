@@ -36,6 +36,14 @@ public class Remove_by_id implements Commandable {
                     System.out.println("Трасса успешно удалена.");
                 }
             }
+            long i=0;
+            int amount= collection.getSize()+2;
+            for (Route route: collection.getCollection()){
+                if (route.getId() < amount){
+                    i++;
+                    route.setId(i);
+                }
+            }
             if (!isRemoved) System.out.println("Элемента с таким id не существует.");
         }
     }

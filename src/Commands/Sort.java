@@ -8,6 +8,7 @@ package Commands;
 
 import Controller.CommandWithoutArg;
 import Controller.RouteCollection;
+import RouteObject.Route;
 
 
 public class Sort implements CommandWithoutArg {
@@ -17,6 +18,14 @@ public class Sort implements CommandWithoutArg {
         RouteCollection collection = new RouteCollection();
         if (collection.getSize() != 0) {
             collection.toSortArray();
+            long i=0;
+            long amount= RouteCollection.getFreeId();
+            for (Route route: collection.getCollection()){
+                if (route.getId() < amount){
+                    i++;
+                    route.setId(i);
+                }
+            }
             System.out.println("Коллекция успешно отсортировна.");
         } else System.out.println("Коллекция пустая.");
     }

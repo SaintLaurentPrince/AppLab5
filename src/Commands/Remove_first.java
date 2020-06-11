@@ -8,6 +8,7 @@ package Commands;
 
 import Controller.CommandWithoutArg;
 import Controller.RouteCollection;
+import RouteObject.Route;
 
 public class Remove_first implements CommandWithoutArg {
     @Override
@@ -16,6 +17,14 @@ public class Remove_first implements CommandWithoutArg {
         if (collection.getSize() != 0) {
             collection.removeFirst();
             System.out.println("Первый элемент успешно удален.");
+            long i=0;
+            int amount= collection.getSize()+2;
+            for (Route route: collection.getCollection()){
+                if (route.getId() < amount){
+                    i++;
+                    route.setId(i);
+                }
+            }
         }
         else System.out.println("Коллекция итак пустая");
 

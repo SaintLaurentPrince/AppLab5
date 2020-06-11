@@ -10,6 +10,7 @@ package Controller;
 
 
 import RouteObject.Route;
+import RouteObject.RouteBuilder;
 import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
@@ -60,6 +61,7 @@ public class RouteCollection {
         return collection.size();
     }
 
+
     public String getInfo() {
         return "Тип коллекции: Vector\nРазмер коллекции: " + this.getSize() + "\nВремя создания: " + creationDate;
     }
@@ -76,6 +78,11 @@ public class RouteCollection {
     }
     public void set(int id, Route route) {
         collection.set(id,route);
+    }
+
+    public void update(int id){
+        id=id-1;
+        collection.set(id,collection.remove(collection.indexOf(collection.lastElement())));
     }
 
     public void removeFirst() {

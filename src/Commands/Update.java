@@ -8,8 +8,11 @@ package Commands;
 
 import Controller.Commandable;
 import Controller.RouteCollection;
+import RouteObject.Coordinates;
 import RouteObject.Route;
 import RouteObject.RouteBuilder;
+
+import java.time.ZonedDateTime;
 
 public class Update implements Commandable {
 
@@ -19,13 +22,15 @@ public class Update implements Commandable {
         try {
             if (collection.isIndexBusy(Integer.parseInt((String) arg))) {
                 int id=Integer.parseInt((String) arg);
-                String oldName= " ";
+                String oldName = "";
                 for (Route route : collection.getCollection()){
                     if (route.getId()==id){
-                       oldName=route.getName();
+                        oldName=route.getName();
                     }
                 }
-                collection.set(id,(new RouteBuilder()).create(oldName, String.valueOf(id)));
+                collection.add((new RouteBuilder()).create(oldName, (String) arg));
+                int ok= Integer.parseInt((String) arg);
+                collection.update(ok);
                 System.out.println("Трасса [id:" + arg + "] успешно обновлена.");
             } else System.out.println("Элемента с таким id не существует.");
         } catch (Exception e) {
